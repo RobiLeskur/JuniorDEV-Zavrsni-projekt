@@ -1,22 +1,29 @@
 import Form from 'react-bootstrap/Form';
-import { useContext } from 'react';
-import AdminContext from './AdminContext';
+import { useContext, useState, useEffect } from 'react';
+import { useAdmin } from './AdminContext';
 
 function AdminSwitch() {
+  const { isAdmin , toggleAdmin } = useAdmin();
+  const [localIsAdmin, setLocalIsAdmin] = useState(isAdmin);
 
-  const admin = useContext(AdminContext)
+  useEffect(() => {
+    setLocalIsAdmin(isAdmin);
+  }, [isAdmin]);
 
-    return (    
-      <Form.Check // prettier-ignore
+  return (    
+    <Form.Group className="d-flex align-items-center">
+      <Form.Label htmlFor="custom-switch" className="me-3">
+        {localIsAdmin ? 'Admin' : 'Korisnik'}
+      </Form.Label>
+      <Form.Check 
         type="switch"
         id="custom-switch"
-        label={
-          admin.isAdmin === true ? 'Admin' : 'Korisnik'
-        }
-        checked={admin.isAdmin}
-        onChange={admin.toggleAdmin}
-      />    
-    );
+        label=""
+        checked={localIsAdmin}
+        onChange={toggleAdmin}
+      />
+    </Form.Group>   
+  );
 }
   
-  export default AdminSwitch;
+export default AdminSwitch;

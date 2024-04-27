@@ -5,25 +5,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import AdminSwitch from './AdminSwitch';
 import { useContext } from 'react';
-import AdminContext from './AdminContext';
 
-function NavBar(toggleAdmin: any, isAdmin: any) {
+
+function NavBar() {
 
 
   return (
-    <Navbar sticky='top'  expand="lg" className="bg-body-tertiary">
+    <Navbar sticky='top'  expand="sm" className="bg-body-tertiary">
       <Container>   
-        <Navbar.Brand as={Link} to='/about'>React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand as={Link} to='/'>Početna</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
 
           <Nav className="me-auto">
-            <Nav.Link as={Link} to='/'>Home</Nav.Link>
-            <Nav.Link as={Link} to='/about'>About</Nav.Link>
-            <Nav.Link><AdminSwitch /></Nav.Link>
-          
+            <Nav.Link as={Link} to='/activities'>Aktivnosti</Nav.Link>  
+            <Nav.Link as={Link} to='/volonteri'>Volonteri</Nav.Link>
+            <Nav.Link as={Link} to='/udruge'>Udruge</Nav.Link>      
           </Nav>
-
+          <Nav>
+          <AdminSwitch />
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

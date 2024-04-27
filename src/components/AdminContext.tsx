@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext,useContext, useState, ReactNode } from 'react';
 
 
 type AdminContextType = {
@@ -12,4 +12,22 @@ const AdminContext = createContext<AdminContextType>({
   toggleAdmin: () => {},
 });
 
-export default AdminContext;
+const AdminContextProvider = ({ children }: { children: ReactNode }) => {
+
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const toggleAdmin = () => {
+    setIsAdmin(!isAdmin);
+  };
+
+  return (
+    <AdminContext.Provider value={{ isAdmin, toggleAdmin }}>
+      {children}
+    </AdminContext.Provider>
+  );
+};
+
+const useAdmin = () => useContext(AdminContext);
+
+
+export { AdminContextProvider, useAdmin };
