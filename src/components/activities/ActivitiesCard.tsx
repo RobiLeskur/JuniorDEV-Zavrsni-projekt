@@ -3,18 +3,21 @@ import { useAdmin } from '../AdminContext';
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 import CloseButton from 'react-bootstrap/CloseButton';
+import axios from 'axios';
 
 
 
-function ActivitiesCard({ name, description, date }: { name: string; description: string; date: string; }) {
+function ActivitiesCard({id, name, description, date, deleteActivity }: { id: string, name: string; description: string; date: string; deleteActivity: Function }) {
 
     const { isAdmin, toggleAdmin } = useAdmin();
-
     const [showPopup, setShowPopup] = useState(false);
 
     const togglePopup = () => {
         setShowPopup(!showPopup);
     };
+
+  
+      
 
     return (
         <>
@@ -27,7 +30,7 @@ function ActivitiesCard({ name, description, date }: { name: string; description
                 </Card.Body>
                 {
                         isAdmin &&
-                        <Button style={{ position: 'absolute', bottom: '0.5rem', right: '0.5rem', opacity: '0.8' }} onClick={toggleAdmin} variant="danger" >🗑</Button>
+                        <Button style={{ position: 'absolute', bottom: '0.5rem', right: '0.5rem', opacity: '0.8' }} onClick={() => deleteActivity(id)} variant="danger" >🗑</Button>
                     }
             </Card>
 

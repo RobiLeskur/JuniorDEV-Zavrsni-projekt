@@ -1,21 +1,21 @@
 {
     "volunteers": [
       {
-        "id": 1,
+        "id": "1",
         "first_name": "Ana",
         "second_name": "Horvat",
         "city": "Zagreb",
         "occupation": "Student"
       },
       {
-        "id": 2,
+        "id": "2",
         "first_name": "Marko",
         "second_name": "Kovač",
         "city": "Split",
         "occupation": "Učitelj"
       },
       {
-        "id": 3,
+        "id": "3",
         "first_name": "Ivana",
         "second_name": "Novak",
         "city": "Osijek",
@@ -24,31 +24,31 @@
     ],
     "activities": [
       {
-        "id": 1,
+        "id": "1",
         "name": "Park Cleaning",
         "description": "Čišćenje smeća i održavanje zelenih površina u parku.",
         "location": "Maksimir Park",
         "date": "2024-04-25",
-        "organization_id": 1,
-        "volunteers": [1, 2]
+        "organization_id": "1",
+        "volunteers": ["1", "2"]
       },
       {
-        "id": 2,
+        "id": "2",
         "name": "Meal Distribution",
         "description": "Podjela toplih obroka beskućnicima.",
         "location": "Trg bana Jelačića",
         "date": "2024-04-26",
-        "organization_id": 1,
-        "volunteers": [3]
+        "organization_id": "1",
+        "volunteers": ["3"]
       }
     ],
     "organizations": [
       {
-        "id": 1,
+        "id": "1",
         "name": "Crveni križ",
         "address": "Ulica 1",
         "city": "Zagreb",
-        "activity_ids": [1, 2]
+        "activity_ids": ["1", "2"]
       }
     ]
   }
