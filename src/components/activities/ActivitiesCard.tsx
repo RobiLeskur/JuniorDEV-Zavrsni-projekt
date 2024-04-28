@@ -1,13 +1,13 @@
 import Card from 'react-bootstrap/Card';
-import { useAdmin } from '../AdminContext';
+import { useAdmin } from '../NavBarAndAdminComands/AdminContext';
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
-import CloseButton from 'react-bootstrap/CloseButton';
-import axios from 'axios';
+import ActivitiesCardPopup from './ActivitiesCardPopup';
+import Activity from '../../interfaces/ActivityInterface';
+import Volunteer from '../../interfaces/VolunteerInterface';
 
 
-
-function ActivitiesCard({id, name, description, date, deleteActivity }: { id: string, name: string; description: string; date: string; deleteActivity: Function }) {
+function ActivitiesCard({activity, deleteActivity, fetchData}: { activity: Activity, deleteActivity: Function, fetchData: Function } ){
 
     const { isAdmin, toggleAdmin } = useAdmin();
     const [showPopup, setShowPopup] = useState(false);
@@ -21,29 +21,21 @@ function ActivitiesCard({id, name, description, date, deleteActivity }: { id: st
 
     return (
         <>
-            <Card border="dark" style={{ width: '18rem', margin: '0.5rem' }} >
-                <Card.Header onClick={togglePopup}>{date}</Card.Header>
+            <Card border="dark" style={{ width: '18rem', margin: '0.5rem', zIndex: '1' }} >
+                <Card.Header onClick={togglePopup}>{activity.date}</Card.Header>
                 <Card.Body onClick={togglePopup} style={{ height: '8rem', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    <Card.Title >{name}</Card.Title>
-                    <Card.Text style={{ height: '4rem', overflow: 'hidden', textOverflow: 'ellipsis' }}>{description}</Card.Text>
+                    <Card.Title >{activity.name}</Card.Title>
+                    <Card.Text style={{ height: '4rem', overflow: 'hidden', textOverflow: 'ellipsis' }}>{activity.description}</Card.Text>
                     
                 </Card.Body>
                 {
                         isAdmin &&
-                        <Button style={{ position: 'absolute', bottom: '0.5rem', right: '0.5rem', opacity: '0.8' }} onClick={() => deleteActivity(id)} variant="danger" >🗑</Button>
+                        <Button style={{ position: 'absolute', bottom: '0.5rem', right: '0.5rem', opacity: '0.8' }} onClick={() => deleteActivity(activity.id)} variant="danger" >🗑</Button>
                     }
             </Card>
 
 
-            {showPopup && (
-                <div className="popup">
-                    <div className="popup-content">
-                    <Button style={{ position: 'absolute', top: '-0.6rem', right: '-0.6rem', padding: '0.3em'}} variant="warning" onClick={togglePopup} ><CloseButton /></Button>
-                        <h2>{name}</h2>
-                        <p>{description}</p>
-                    </div>
-                </div>
-            )}
+            {showPopup && <ActivitiesCardPopup fetchData={fetchData} togglePopup={togglePopup} activity={activity} />}
         </>
     );
 }

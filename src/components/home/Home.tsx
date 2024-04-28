@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function Home() {
   return (
     <div>
-      <h1>Volontiranje - Naslov</h1>
+      <h1>CroVolonteri</h1>
       <p>Ovaj rad sam napravio u sklopu edit JuniorDEV programa. - prestavljanje</p>
     
       <p>Pregledajte druge funkcionalnosti!</p>

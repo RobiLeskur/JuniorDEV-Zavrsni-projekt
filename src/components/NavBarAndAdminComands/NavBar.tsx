@@ -13,7 +13,7 @@ function NavBar() {
   return (
     <Navbar sticky='top'  expand="sm" className="bg-body-tertiary">
       <Container>   
-        <Navbar.Brand as={Link} to='/'>Početna</Navbar.Brand>
+        <Navbar.Brand as={Link} to='/'>CroVolonteri</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
 

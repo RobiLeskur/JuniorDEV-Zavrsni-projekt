@@ -1,16 +1,15 @@
 import ActivitiesCard from './ActivitiesCard';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import Activity from '../../interfaces/activityInterface';
+import Activity from '../../interfaces/ActivityInterface';
+import Volunteer from '../../interfaces/VolunteerInterface';
 
-function Activities({ deleteActivity, activities }: { deleteActivity: Function, activities: Activity[] }) {
+function Activities({ deleteActivity, activities, fetchData }: { deleteActivity: Function,fetchData: Function ,activities: Activity[]}) {
 
   return (
     <div>
       <h1>Aktivnosti:</h1><br />
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-around' }}>
         {activities.map((activity: Activity) => (
-          <ActivitiesCard key={activity.id} id={activity.id} name={activity.name} description={activity.description} date={activity.date} deleteActivity={deleteActivity}/>
+        <ActivitiesCard key={activity.id} fetchData={fetchData} activity={activity} deleteActivity={deleteActivity}/>
         ))}
       </div>
     </div>
