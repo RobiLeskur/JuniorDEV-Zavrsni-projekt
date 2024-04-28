@@ -1,4 +1,4 @@
-import Volunteer from "./VolunteerInterface";
+
 
 export default interface Activity {
     id: string;
@@ -7,7 +7,7 @@ export default interface Activity {
     date: string;
     location: string;
     organization: string;
-    volunteers: Volunteer[];
+    volunteers: [];
   }
 
   
