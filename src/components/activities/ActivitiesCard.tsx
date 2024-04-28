@@ -5,23 +5,27 @@ import { useState } from 'react';
 import ActivitiesCardPopup from './ActivitiesCardPopup';
 import Activity from '../../interfaces/ActivityInterface';
 import Volunteer from '../../interfaces/VolunteerInterface';
+import styles from './activities.module.css';
+
+
 
 
 function ActivitiesCard({activity, deleteActivity, fetchData}: { activity: Activity, deleteActivity: Function, fetchData: Function } ){
 
     const { isAdmin, toggleAdmin } = useAdmin();
     const [showPopup, setShowPopup] = useState(false);
+   
 
     const togglePopup = () => {
         setShowPopup(!showPopup);
     };
 
-  
+   
       
 
     return (
         <>
-            <Card border="dark" style={{ width: '18rem', margin: '0.5rem', zIndex: '1' }} >
+            <Card border="dark" className={styles.activitiesCard} style={{ width: '18rem', margin: '0.5rem', zIndex: '1' }} >
                 <Card.Header onClick={togglePopup}>{activity.date}</Card.Header>
                 <Card.Body onClick={togglePopup} style={{ height: '8rem', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     <Card.Title >{activity.name}</Card.Title>
@@ -34,7 +38,7 @@ function ActivitiesCard({activity, deleteActivity, fetchData}: { activity: Activ
                     }
             </Card>
 
-
+           
             {showPopup && <ActivitiesCardPopup fetchData={fetchData} togglePopup={togglePopup} activity={activity} />}
         </>
     );

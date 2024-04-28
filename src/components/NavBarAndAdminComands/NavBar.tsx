@@ -11,7 +11,7 @@ function NavBar() {
 
 
   return (
-    <Navbar sticky='top' style={{zIndex:"1000"}}  expand="sm" className="bg-body-tertiary">
+    <Navbar sticky='top' style={{zIndex:"2"}}  expand="sm" className="bg-body-tertiary">
       <Container>   
         <Navbar.Brand as={Link} to='/'>CroVolonteri</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

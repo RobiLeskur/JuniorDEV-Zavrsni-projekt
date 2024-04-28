@@ -3,6 +3,7 @@ import axios from 'axios';
 import Activity from '../../interfaces/ActivityInterface';
 import Volunteer from '../../interfaces/VolunteerInterface';
 import Organization from '../../interfaces/OrganizationInterface';
+import styles from './activities.module.css'; // Import CSS module
 
 import { Button, ButtonGroup, CloseButton } from 'react-bootstrap';
 
@@ -29,13 +30,9 @@ function ActivitiesCardPopup({ togglePopup, activity, fetchData }: { togglePopup
         return organizations.find(organization => organization.id === organizationId);
     };
 
-
-
     const getVolunteerById = (volunteerId: string) => {
         return volunteers.find(volunteer => volunteer.id === volunteerId);
     };
-
-    
 
     const removeVolunteerFromActivity = (volunteerId: string) => {
         const updatedVolunteers = activity.volunteers.filter(id => id !== volunteerId);
@@ -58,44 +55,35 @@ function ActivitiesCardPopup({ togglePopup, activity, fetchData }: { togglePopup
     };
 
     return (
-        <div className="popup">
-            <div className="popup-content">
+        <div className={styles.popup}>
+            <div className={styles.popupContent}>
                 <CloseButton style={{ position: 'absolute', top: '0.2rem', right: '0.2rem', padding: '0.3em' }} onClick={togglePopup} />
                 <h2>{activity.name}</h2>
                 <p><b>Opis:</b> {activity.description}</p>
                 <p><b>Lokacija:</b> {activity.location}</p>
-
-                
-               
                 <p><b>Organizacija: </b>{organizations && getOrganizationById(activity.organization)?.name}</p>
-                
+                <hr />
                 <p style={{ marginBottom: "0" }}><b>Volonteri:</b></p>
-
-                    {/* This writes out all volunteers for a given activity */}
-                <div className="lg scrollable-div">
+                <div className={`${styles.lg} ${styles.scrollableDiv}`}>
                     {activity.volunteers && activity.volunteers.map(volunteerId => {
                         const volunteer = getVolunteerById(volunteerId);
                         return (
                             volunteer &&
-                            <div key={volunteer.id} className='volunteer-item'>
+                            <div key={volunteer.id} className={styles.volunteerItem}>
                                 <p style={{ marginBottom: "0" }}>ID: {volunteer.id} - {volunteer.first_name} {volunteer.last_name}</p>
                                 <Button onClick={() => confirmDeleteVolunteer(volunteer.id)} variant="outline-danger">Delete</Button>{' '}
                             </div>
                         );
                     })}
                 </div>
-
-                {/* Deletion confirmation popup */}
                 {selectedVolunteerId && (
-                    <div className="confirmation-popup">
+                    <div className={styles.confirmationPopup}>
                         <hr />
-                        
                         <p>Jeste li sigurni da želite maknuti volontera pod imenom {getVolunteerById(selectedVolunteerId)?.first_name} {getVolunteerById(selectedVolunteerId)?.last_name} s popisa?</p>
                         <ButtonGroup aria-label="Basic example">
                             <Button onClick={() => removeVolunteerFromActivity(selectedVolunteerId)} variant="danger">Yes</Button>
                             <Button onClick={cancelDeleteVolunteer} variant="outline-success">No</Button>
                         </ButtonGroup>
-  
                     </div>
                 )}
             </div>

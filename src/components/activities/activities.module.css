@@ -1,0 +1,77 @@
+/* popup.module.css */
+
+.activitiesContainer{
+}
+
+.activitiesCard{
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: all ease 0.2s;
+}
+
+.activitiesCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px 2px rgba(98, 169, 250, 0.25);
+  }
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 350px; 
+    
+  }
+  
+.closeButton{
+    position: absolute;
+     top: 0.2rem;
+      right: 0.2rem;
+      padding: 0.3em ;
+}
+
+  .popupContent {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 350px;
+    z-index: 1;
+    box-shadow: 0px 10px 20px 2px rgba(98, 169, 250, 0.25);
+  }
+  
+  .md {
+    max-height: 200px;
+  }
+  
+  .lg {
+    max-height: 350px;
+  }
+  
+  .scrollableDiv {
+    max-height: 350px;
+    overflow-y: auto; 
+  }
+  
+  .volunteerItem {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 3px;
+  }
+  
+  .newActivityBtn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    z-index: 999;
+  }
+  
+  
+  
