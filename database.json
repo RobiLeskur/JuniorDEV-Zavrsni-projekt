@@ -5,7 +5,7 @@
       "first_name": "Ana",
       "last_name": "Horvat",
       "city": "Zagreb",
-      "occupation": "Student",
+      "preferences": ["Edukacija", "Zdravstvo"],
       "gender": "female"
     },
     {
@@ -13,7 +13,7 @@
       "first_name": "Marko",
       "last_name": "Kovač",
       "city": "Split",
-      "occupation": "Učitelj",
+      "preferences": ["Edukacija", "Kultura"],
       "gender": "male"
     },
     {
@@ -21,7 +21,7 @@
       "first_name": "Ivana",
       "last_name": "Novak",
       "city": "Osijek",
-      "occupation": "Medicinska sestra",
+      "preferences": ["Zdravstvo"],
       "gender": "female"
     },
     {
@@ -29,7 +29,7 @@
       "first_name": "Petar",
       "last_name": "Klarić",
       "city": "Rijeka",
-      "occupation": "Engineer",
+      "preferences": ["Ekologija", "Kultura", "Razno"],
       "gender": "male"
     },
     {
@@ -37,7 +37,7 @@
       "first_name": "Maja",
       "last_name": "Pavić",
       "city": "Zadar",
-      "occupation": "Lawyer",
+      "preferences": ["Prijevoz"],
       "gender": "female"
     },
     {
@@ -45,7 +45,7 @@
       "first_name": "Ivan",
       "last_name": "Babić",
       "city": "Pula",
-      "occupation": "Architect",
+      "preferences": ["Edukacija", "Zdravstvo", "Ekologija", "Razno"],
       "gender": "male"
     },
     {
@@ -53,7 +53,7 @@
       "first_name": "Marina",
       "last_name": "Knežević",
       "city": "Dubrovnik",
-      "occupation": "Nurse",
+      "preferences": ["Kultura", "Ekologija"],
       "gender": "female"
     },
     {
@@ -61,7 +61,7 @@
       "first_name": "Filip",
       "last_name": "Tomić",
       "city": "Varaždin",
-      "occupation": "Chef",
+      "preferences": ["Prijevoz", "Edukacija", "Razno"],
       "gender": "male"
     },
     {
@@ -69,7 +69,7 @@
       "first_name": "Kristina",
       "last_name": "Horvat",
       "city": "Zagreb",
-      "occupation": "Psychologist",
+      "preferences": ["Edukacija", "Kultura"],
       "gender": "female"
     },
     {
@@ -77,10 +77,11 @@
       "first_name": "Igor",
       "last_name": "Vuković",
       "city": "Split",
-      "occupation": "Journalist",
+      "preferences": ["Zdravstvo", "Ekologija", "Razno"],
       "gender": "male"
     }
-  ],
+]
+,
   "activities": [
     {
       "id": "1",

@@ -19,8 +19,8 @@ function NavBar() {
 
           <Nav className="me-auto">
             <Nav.Link as={Link} to='/activities'>Aktivnosti</Nav.Link>  
-            <Nav.Link as={Link} to='/volonteri'>Volonteri</Nav.Link>
-            <Nav.Link as={Link} to='/udruge'>Udruge</Nav.Link>      
+            <Nav.Link as={Link} to='/volunteers'>Volonteri</Nav.Link>
+            <Nav.Link as={Link} to='/organizations'>Udruge</Nav.Link>      
           </Nav>
           <Nav>
           <AdminSwitch />

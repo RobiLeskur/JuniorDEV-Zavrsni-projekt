@@ -1,0 +1,22 @@
+export const ListOfCities = [
+    "Bjelovar",
+    "Cakovec",
+    "Dubrovnik",
+    "Đakovo",
+    "Karlovac",
+    "Koprivnica",
+    "Osijek",
+    "Požega",
+    "Pula",
+    "Rijeka",
+    "Sesvete",
+    "Šibenik",
+    "Sisak",
+    "Slavonski Brod",
+    "Split",
+    "Varaždin",
+    "Vinkovci",
+    "Vukovar",
+    "Zadar",
+    "Zagreb"
+  ];

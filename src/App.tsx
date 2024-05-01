@@ -3,7 +3,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import NavBar from './components/NavBarAndAdminComands/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/home/Home';
-import Activities from './components/activities/Activities';
+import ActivitiesPage from './components/activities/ActivitiesPage';
+import VolunteersPage from './components/volunteers/VolunteersPage';
 import { AdminContextProvider } from './components/NavBarAndAdminComands/AdminContext';
 import axios from 'axios';
 import Activity from './interfaces/ActivityInterface';
@@ -66,7 +67,11 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route
                   path="/activities"
-                  element={<Activities deleteActivity={deleteActivity} setActivities={setActivities} fetchData={fetchData} activities={activities} />}
+                  element={<ActivitiesPage deleteActivity={deleteActivity} setActivities={setActivities} fetchData={fetchData} activities={activities} />}
+                />
+                <Route
+                  path="/volunteers"
+                  element={<VolunteersPage  />}
                 />
               </Routes>
             )}

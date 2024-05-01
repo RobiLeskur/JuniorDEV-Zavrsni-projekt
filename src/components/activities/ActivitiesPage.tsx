@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 import NewActivityPopup from './NewActivityPopup';
 
-function Activities({ deleteActivity, activities,setActivities, fetchData }: {setActivities: Function ,deleteActivity: Function,fetchData: Function ,activities: Activity[]}) {
+function ActivitiesPage({ deleteActivity, activities,setActivities, fetchData }: {setActivities: Function ,deleteActivity: Function,fetchData: Function ,activities: Activity[]}) {
   const [newActivityPopup, setNewActivityPopup] = useState(false);
 
 
@@ -30,4 +30,4 @@ function Activities({ deleteActivity, activities,setActivities, fetchData }: {se
   );
 }
 
-export default Activities;
+export default ActivitiesPage;
