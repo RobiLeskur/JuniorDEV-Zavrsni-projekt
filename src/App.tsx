@@ -38,22 +38,20 @@ function App() {
       })
       .catch(err => {
         console.log(err);
-        setIsLoading(false); // Set loading state to false even if there's an error
+        setIsLoading(false);
       });
   };
 
-  const deleteActivity = (idPodatka: string) => {
-    console.log(idPodatka + " is deleted");
-    /* 
-      axios.delete('http://localhost:3001/activities/' + idPodatka)
+  const deleteActivity = (idPodatka: String) => {
+    axios
+        .delete('http://localhost:3001/activities/' + idPodatka)
         .then(() => {
-          fetchData(); // Refresh data after deletion
+            setActivities(prevActivities => prevActivities.filter(activity => activity.id !== idPodatka));
         })
         .catch(err => {
-          console.log(err);
+            console.log(err);
         });
-    */
-  };
+};
 
   return (
     <>
@@ -68,7 +66,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route
                   path="/activities"
-                  element={<Activities deleteActivity={deleteActivity} fetchData={fetchData} activities={activities} />}
+                  element={<Activities deleteActivity={deleteActivity} setActivities={setActivities} fetchData={fetchData} activities={activities} />}
                 />
               </Routes>
             )}

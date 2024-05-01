@@ -3,7 +3,8 @@ import axios from 'axios';
 import Activity from '../../interfaces/ActivityInterface';
 import Volunteer from '../../interfaces/VolunteerInterface';
 import Organization from '../../interfaces/OrganizationInterface';
-import styles from './activities.module.css'; // Import CSS module
+import styles from './activities.module.css';
+import AddVolunteerToActivityForm from './AddVolunteerToActivityForm';
 
 import { Button, ButtonGroup, CloseButton } from 'react-bootstrap';
 
@@ -62,6 +63,7 @@ function ActivitiesCardPopup({ togglePopup, activity, fetchData }: { togglePopup
                 <p><b>Opis:</b> {activity.description}</p>
                 <p><b>Lokacija:</b> {activity.location}</p>
                 <p><b>Organizacija: </b>{organizations && getOrganizationById(activity.organization)?.name}</p>
+                <AddVolunteerToActivityForm />
                 <hr />
                 <p style={{ marginBottom: "0" }}><b>Volonteri:</b></p>
                 <div className={`${styles.lg} ${styles.scrollableDiv}`}>

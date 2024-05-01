@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 import NewActivityPopup from './NewActivityPopup';
 
-function Activities({ deleteActivity, activities, fetchData }: { deleteActivity: Function,fetchData: Function ,activities: Activity[]}) {
+function Activities({ deleteActivity, activities,setActivities, fetchData }: {setActivities: Function ,deleteActivity: Function,fetchData: Function ,activities: Activity[]}) {
   const [newActivityPopup, setNewActivityPopup] = useState(false);
 
 
@@ -25,7 +25,7 @@ function Activities({ deleteActivity, activities, fetchData }: { deleteActivity:
         ))}
       </div>
       <Button variant="success" className={styles.newActivityBtn} onClick={toggleNewActivityPopup}>Nova Aktivnost</Button>
-      {newActivityPopup && <NewActivityPopup toggleNewActivityPopup={toggleNewActivityPopup} />}
+      {newActivityPopup && <NewActivityPopup setActivities={setActivities} toggleNewActivityPopup={toggleNewActivityPopup} />}
     </div>
   );
 }

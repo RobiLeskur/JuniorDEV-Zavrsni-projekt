@@ -9,11 +9,11 @@ import Organization from '../../interfaces/OrganizationInterface';
 import axios from 'axios';
 import Volunteer from '../../interfaces/VolunteerInterface';
 
-function ActivitiesCard({ toggleNewActivityPopup }: { toggleNewActivityPopup: () => void }) {
+function ActivitiesCard({ toggleNewActivityPopup, setActivities }: { toggleNewActivityPopup: () => void, setActivities: Function }) {
     const [organizations, setOrganizations] = useState([] as Organization[]);
     const [volunteers, setVolunteers] = useState([] as Volunteer[]);
     const [newActivityData, setNewActivityData] = useState({
-        ime: "",
+        name: "",
         description: "",
         date: "",
         location: "",
@@ -37,20 +37,14 @@ function ActivitiesCard({ toggleNewActivityPopup }: { toggleNewActivityPopup: ()
 
     function inputChange(event: any) {
         const { name, value } = event.target;
-        setNewActivityData({ ...newActivityData, [name]: value });
 
         if (name === 'date') {
-            // Format the date to "dd.mm.yyyy"
             const [year, month, day] = value.split('-');
-            const formattedDate = `${day}.${month}.${year}`;
+            const formattedDate = `${day}.${month}.${year}.`;
             setNewActivityData({ ...newActivityData, [name]: formattedDate });
         } else {
             setNewActivityData({ ...newActivityData, [name]: value });
         }
-    
-
-        console.log(newActivityData);
-
     }
 
 
@@ -60,15 +54,37 @@ function ActivitiesCard({ toggleNewActivityPopup }: { toggleNewActivityPopup: ()
         setNewActivityData({ ...newActivityData, volunteers: selectedVolunteers });
     }
 
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault(); 
+
+        console.log(newActivityData);
+
+        axios.post('http://localhost:3001/activities', newActivityData)
+        .then(rez => {
+            axios.get("http://localhost:3001/activities")
+              .then(rez => setActivities(rez.data));
+        });
+    
+       
+        setNewActivityData({
+            name: "",
+            description: "",
+            date: "",
+            location: "",
+            organization: "",
+            volunteers: []
+        });
+    }
+
     return (
         <div className={styles.popup}>
             <div className={styles.popupContent}>
                 <CloseButton className={styles.closeButton} onClick={toggleNewActivityPopup} />
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <h2 style={{ padding: '10px' }}>Dodaj aktivnost</h2>
                     <Row className="mb-3">
                         <Form.Group as={Col}>
-                            <Form.Control required type="text" name='ime' value={newActivityData.ime} onChange={inputChange} placeholder="Ime" />
+                            <Form.Control required type="text" name='name' value={newActivityData.name} onChange={inputChange} placeholder="Ime" />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Control required type="date" name='date' onChange={inputChange} />
@@ -86,8 +102,9 @@ function ActivitiesCard({ toggleNewActivityPopup }: { toggleNewActivityPopup: ()
                     </Row>
                     <Row className="mb-3">
                         <Form.Group as={Col} required controlId="formGridState">
-                            <Form.Label>Organizacija</Form.Label>
-                            <Form.Select name='organization' value={newActivityData.organization} onChange={inputChange} defaultValue="">
+                        <Form.Label>Organizacija</Form.Label>
+                            <Form.Select required name='organization' onChange={inputChange}>
+                            <option value="">Odaberi organizaciju</option>
                                 {organizations.map((organization: Organization) => (
                                     <option key={organization.id} value={organization.id}>{organization.name}</option>
                                 ))}
@@ -104,7 +121,7 @@ function ActivitiesCard({ toggleNewActivityPopup }: { toggleNewActivityPopup: ()
                             </Form.Select>
                         </Form.Group>
                     </Row>
-                    <Button variant="success" type="submit">
+                    <Button variant="success" type="submit" >
                         Dodaj
                     </Button>
                 </Form>
