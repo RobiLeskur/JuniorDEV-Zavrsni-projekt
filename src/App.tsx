@@ -43,16 +43,18 @@ function App() {
       });
   };
 
-  const deleteActivity = (idPodatka: String) => {
+  const deleteActivity = (activityId: String) => {
     axios
-        .delete('http://localhost:3001/activities/' + idPodatka)
+        .delete('http://localhost:3001/activities/' + activityId)
         .then(() => {
-            setActivities(prevActivities => prevActivities.filter(activity => activity.id !== idPodatka));
+            setActivities(prevActivities => prevActivities.filter(activity => activity.id !== activityId));
         })
         .catch(err => {
             console.log(err);
         });
 };
+
+
 
   return (
     <>

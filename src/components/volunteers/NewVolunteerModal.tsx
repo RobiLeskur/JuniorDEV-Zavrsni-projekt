@@ -29,8 +29,9 @@ function NewVolunteerModal(props : { show: boolean, onHide: () => void; }) {
                 <option key={city}>{city}</option>
               ))}
             </Form.Select>
-            <p>Aktivnosti:</p>
+            <article className={styles.activitiesAndGenderContainer}>
             <div className={styles.group}>
+              <p>Aktivnosti:</p>
             <Form.Check label="Ekologija" name="group1" type={"checkbox"} />
             <Form.Check label="Edukacija" name="group1" type={"checkbox"} />
             <Form.Check label="Prijevoz" name="group1" type={"checkbox"} />
@@ -38,7 +39,12 @@ function NewVolunteerModal(props : { show: boolean, onHide: () => void; }) {
             <Form.Check label="Kultura" name="group1" type={"checkbox"} />
             <Form.Check label="Razno" name="group1" type={"checkbox"} />
           </div>
-
+          <div className={styles.group}>
+          <p>Spol:</p>
+          <Form.Check label="Muško" name="group1" type={"radio"} />
+          <Form.Check label="Žensko" name="group1" type={"radio"} />
+          </div>
+</article>
 
         </Modal.Body>
         <Modal.Footer>

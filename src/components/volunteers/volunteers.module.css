@@ -37,3 +37,17 @@
     left: 1rem;
     bottom: 1rem;
   }
+
+  .activitiesAndGenderContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    flex-wrap: wrap;
+  }
+
+  .displayVolunteersContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }

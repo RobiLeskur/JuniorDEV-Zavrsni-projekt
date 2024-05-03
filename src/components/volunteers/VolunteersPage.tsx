@@ -6,16 +6,17 @@ import NewVolunteerModal from './NewVolunteerModal';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Volunteer from '../../interfaces/VolunteerInterface';
+import DisplayVolunteers from './DisplayVolunteers';
 
 
-
-function VolunteersPage({ }: {}) {
+function VolunteersPage({}: {}) {
   const [modalShow, setModalShow] = useState(false);
   const [volunteers, setVolunteers] = useState([] as Volunteer[]);
   const [newVolunteerData, setNewVolunteerData] = useState({
     first_name: "",
     last_name: "",
     city: "",
+    gender: "",
     preferences: [] as String[],
   })
   
@@ -27,11 +28,34 @@ function VolunteersPage({ }: {}) {
 }, []);
 
 
+function deleteVolunteer(volunteerId: string) {
+  axios
+        .delete('http://localhost:3001/volunteers/' + volunteerId)
+        .then(() => {
+            setVolunteers(prevVolunteers => prevVolunteers.filter(volunteer => volunteer.id !== volunteerId));
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+
 function handleNewVolunteer(){
+  console.log(newVolunteerData);
+  
+/* 
+   axios
+  .post("http://localhost:3001/volunteers", newVolunteerData)
+  .then(res => {
+    axios.get("http://localhost:3001/volunteers")
+      .then(rez => setVolunteers(rez.data));
+});  */
 
 
   setModalShow(false)
 }
+
+
 
   return (
     <>
@@ -46,7 +70,7 @@ function handleNewVolunteer(){
                 <option key={city}>{city}</option>
               ))}
             </Form.Select>
-          </Form.Group>
+            </Form.Group>
           <div className={styles.group}>
             <Form.Check label="Ekologija" name="group1" type={"radio"} />
             <Form.Check label="Edukacija" name="group1" type={"radio"} />
@@ -55,6 +79,8 @@ function handleNewVolunteer(){
             <Form.Check label="Kultura" name="group1" type={"radio"} />
             <Form.Check label="Razno" name="group1" type={"radio"} />
           </div>
+          
+          
 
           <Button className={styles.addNewVolunteer} variant="success" type="button" onClick={() => setModalShow(true)}>Novi</Button>
 
@@ -65,7 +91,12 @@ function handleNewVolunteer(){
         </article>
 
 
-        <article className={styles.right}></article>
+        <article className={styles.right}>
+
+        <DisplayVolunteers volunteers={volunteers as Volunteer[]} deleteVolunteer={deleteVolunteer} />
+
+
+        </article>
       </div>
     </>
   );

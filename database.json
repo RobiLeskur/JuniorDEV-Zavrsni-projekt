@@ -5,7 +5,10 @@
       "first_name": "Ana",
       "last_name": "Horvat",
       "city": "Zagreb",
-      "preferences": ["Edukacija", "Zdravstvo"],
+      "preferences": [
+        "Edukacija",
+        "Zdravstvo"
+      ],
       "gender": "female"
     },
     {
@@ -13,7 +16,10 @@
       "first_name": "Marko",
       "last_name": "Kovač",
       "city": "Split",
-      "preferences": ["Edukacija", "Kultura"],
+      "preferences": [
+        "Edukacija",
+        "Kultura"
+      ],
       "gender": "male"
     },
     {
@@ -21,7 +27,9 @@
       "first_name": "Ivana",
       "last_name": "Novak",
       "city": "Osijek",
-      "preferences": ["Zdravstvo"],
+      "preferences": [
+        "Zdravstvo"
+      ],
       "gender": "female"
     },
     {
@@ -29,7 +37,11 @@
       "first_name": "Petar",
       "last_name": "Klarić",
       "city": "Rijeka",
-      "preferences": ["Ekologija", "Kultura", "Razno"],
+      "preferences": [
+        "Ekologija",
+        "Kultura",
+        "Razno"
+      ],
       "gender": "male"
     },
     {
@@ -37,7 +49,9 @@
       "first_name": "Maja",
       "last_name": "Pavić",
       "city": "Zadar",
-      "preferences": ["Prijevoz"],
+      "preferences": [
+        "Prijevoz"
+      ],
       "gender": "female"
     },
     {
@@ -45,7 +59,12 @@
       "first_name": "Ivan",
       "last_name": "Babić",
       "city": "Pula",
-      "preferences": ["Edukacija", "Zdravstvo", "Ekologija", "Razno"],
+      "preferences": [
+        "Edukacija",
+        "Zdravstvo",
+        "Ekologija",
+        "Razno"
+      ],
       "gender": "male"
     },
     {
@@ -53,7 +72,10 @@
       "first_name": "Marina",
       "last_name": "Knežević",
       "city": "Dubrovnik",
-      "preferences": ["Kultura", "Ekologija"],
+      "preferences": [
+        "Kultura",
+        "Ekologija"
+      ],
       "gender": "female"
     },
     {
@@ -61,7 +83,11 @@
       "first_name": "Filip",
       "last_name": "Tomić",
       "city": "Varaždin",
-      "preferences": ["Prijevoz", "Edukacija", "Razno"],
+      "preferences": [
+        "Prijevoz",
+        "Edukacija",
+        "Razno"
+      ],
       "gender": "male"
     },
     {
@@ -69,7 +95,10 @@
       "first_name": "Kristina",
       "last_name": "Horvat",
       "city": "Zagreb",
-      "preferences": ["Edukacija", "Kultura"],
+      "preferences": [
+        "Edukacija",
+        "Kultura"
+      ],
       "gender": "female"
     },
     {
@@ -77,11 +106,14 @@
       "first_name": "Igor",
       "last_name": "Vuković",
       "city": "Split",
-      "preferences": ["Zdravstvo", "Ekologija", "Razno"],
+      "preferences": [
+        "Zdravstvo",
+        "Ekologija",
+        "Razno"
+      ],
       "gender": "male"
     }
-]
-,
+  ],
   "activities": [
     {
       "id": "1",
