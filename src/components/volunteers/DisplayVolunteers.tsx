@@ -16,8 +16,8 @@ function DisplayVolunteers({ volunteers, deleteVolunteer }: { volunteers: Volunt
         <div className={styles.displayVolunteersContainer}>
             <div className="row row-cols-1 row-cols-md-2 g-4">
                 {volunteers.map((volunteer) => (
-                    <div className="col" key={volunteer.id}>
-                        <Card style={{ marginBottom: '1rem' , height: '100%', overflow: 'hidden', position: 'relative' }}>
+                    <div className='col' style={volunteers.length === 1 ? { width: '100%'} : {}} key={volunteer.id}>
+                        <Card className={styles.card}>
                             <Card.Body>
                                 <Card.Title>{volunteer.first_name} {volunteer.last_name}</Card.Title>
                                 <hr />

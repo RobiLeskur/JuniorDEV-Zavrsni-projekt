@@ -36,13 +36,33 @@
     padding-right: 1em;
     left: 1rem;
     bottom: 1rem;
+    opacity: 80%;
   }
+
+  .addNewVolunteer:hover{
+    opacity: 1;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+    height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    
+  }
+
+
 
   .activitiesAndGenderContainer{
     display: flex;
     flex-direction: row;
     justify-content: left;
     flex-wrap: wrap;
+    overflow: auto;
+    scrollbar-width: thin;
+    height: 70%;
   }
 
   .displayVolunteersContainer{

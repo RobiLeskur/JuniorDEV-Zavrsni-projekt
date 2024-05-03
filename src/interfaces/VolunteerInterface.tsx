@@ -5,7 +5,7 @@ export default interface Volunteer {
     last_name: string;
     city: string;
     gender: string;
-    preferences: [];
+    preferences: string[];
   }
 
   
