@@ -6,7 +6,7 @@ import styles from './volunteers.module.css';
 import { useAdmin } from '../NavBarAndAdminComands/AdminContext';
 
 
-function DisplayVolunteers({ volunteers, deleteVolunteer }: { volunteers: Volunteer[], deleteVolunteer: Function }) {
+function DisplayVolunteers({ volunteers, deleteVolunteer, editVolunteer }: { volunteers: Volunteer[], deleteVolunteer: Function, editVolunteer: Function }) {
     const { isAdmin, toggleAdmin } = useAdmin();
 
 
@@ -16,9 +16,9 @@ function DisplayVolunteers({ volunteers, deleteVolunteer }: { volunteers: Volunt
         <div className={styles.displayVolunteersContainer}>
             <div className="row row-cols-1 row-cols-md-2 g-4">
                 {volunteers.map((volunteer) => (
-                    <div className='col' style={volunteers.length === 1 ? { width: '100%'} : {}} key={volunteer.id}>
+                    <div className='col' style={volunteers.length === 1 ? { width: '100%' } : {}} key={volunteer.id}>
                         <Card className={styles.card}>
-                            <Card.Body>
+                            <Card.Body style={{paddingBottom: '0'}}>
                                 <Card.Title>{volunteer.first_name} {volunteer.last_name}</Card.Title>
                                 <hr />
                                 <Card.Text>
@@ -28,8 +28,11 @@ function DisplayVolunteers({ volunteers, deleteVolunteer }: { volunteers: Volunt
                                 </Card.Text>
                                 {
                                     isAdmin &&
-                                    <Button style={{ position: 'absolute', bottom: '0.5rem', right: '0.5rem', opacity: '0.8' }} onClick={() => deleteVolunteer(volunteer.id)} variant="danger">🗑</Button>
-                                }
+                                    <div style={{float: 'right'}}>
+                                    
+                                        <Button style={{ opacity: '0.7' }} onClick={() => editVolunteer(volunteer)} variant="warning">Edit</Button>
+                                        <Button style={{ opacity: '0.8' }} onClick={() => deleteVolunteer(volunteer.id)} variant="danger">🗑</Button>
+                                    </div>}
                             </Card.Body>
                         </Card>
                     </div>

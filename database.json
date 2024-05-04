@@ -12,17 +12,6 @@
       "gender": "female"
     },
     {
-      "id": "2",
-      "first_name": "Marko",
-      "last_name": "Kovač",
-      "city": "Split",
-      "preferences": [
-        "Edukacija",
-        "Kultura"
-      ],
-      "gender": "male"
-    },
-    {
       "id": "3",
       "first_name": "Ivana",
       "last_name": "Novak",
@@ -114,41 +103,25 @@
       "gender": "male"
     },
     {
-      "id": "3516",
-      "first_name": "sd",
-      "last_name": "as",
-      "city": "Bjelovar",
+      "id": "9941",
+      "first_name": "asd",
+      "last_name": "d",
+      "city": "Koprivnica",
       "gender": "female",
       "preferences": [
-        "Ekologija",
-        "Zdravstvo"
+        "Edukacija"
       ]
     },
     {
-      "id": "6477",
-      "first_name": "asdasdasd",
-      "last_name": "asd",
-      "city": "Dubrovnik",
-      "gender": "female",
-      "preferences": []
-    },
-    {
-      "id": "4d61",
-      "first_name": "asd",
-      "last_name": "asd",
-      "city": "Dubrovnik",
-      "gender": "female",
+      "id": "2",
+      "first_name": "Marko",
+      "last_name": "Kovač",
+      "city": "Split",
       "preferences": [
+        "Kultura",
         "Prijevoz"
-      ]
-    },
-    {
-      "id": "c4d4",
-      "first_name": "asd",
-      "last_name": "asd",
-      "city": "Bjelovar",
-      "gender": "male",
-      "preferences": []
+      ],
+      "gender": "male"
     }
   ],
   "activities": [

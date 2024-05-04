@@ -3,15 +3,17 @@ import { ListOfCities } from '../ListOfCities';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import NewVolunteerModal from './NewVolunteerModal';
+import EditVolunteerModal from './EditVolunteerModal';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Volunteer from '../../interfaces/VolunteerInterface';
 import DisplayVolunteers from './DisplayVolunteers';
 
-
 function VolunteersPage({ }: {}) {
   const [modalShow, setModalShow] = useState(false);
+  const [editModalShow, setEditModalShow] = useState(false); 
   const [volunteers, setVolunteers] = useState([] as Volunteer[]);
+  const [editingVolunteer, setEditingVolunteer] = useState<Volunteer | undefined>(); 
 
   const [filters, setFilters] = useState({
     city: '',
@@ -31,6 +33,11 @@ function VolunteersPage({ }: {}) {
     setVolunteers(prevVolunteers => [...prevVolunteers, newVolunteer]);
   }
 
+  function updateVolunteer(updatedVolunteer: Volunteer) {
+  
+  
+  }
+
   function deleteVolunteer(volunteerId: string) {
     axios
       .delete('http://localhost:3001/volunteers/' + volunteerId)
@@ -40,6 +47,12 @@ function VolunteersPage({ }: {}) {
       .catch(err => {
         console.log(err);
       });
+  }
+  function editVolunteer(volunteer: Volunteer) {
+  
+    setEditingVolunteer(volunteer); 
+    setModalShow(true); 
+  
   }
 
 
@@ -116,13 +129,25 @@ function VolunteersPage({ }: {}) {
             show={modalShow}
             onHide={() => setModalShow(false)}
             addNewVolunteer={addNewVolunteer}
+          
           />
+
+
+{editingVolunteer && (
+          <EditVolunteerModal
+            show={editModalShow}
+            onHide={() => setEditModalShow(false)}
+            editingVolunteer={editingVolunteer}
+            updateVolunteer={updateVolunteer} 
+          />
+        )}
+
         </article>
 
 
         <article className={styles.right}>
 
-          <DisplayVolunteers volunteers={filteredVolunteers as Volunteer[]} deleteVolunteer={deleteVolunteer} />
+          <DisplayVolunteers volunteers={filteredVolunteers as Volunteer[]} deleteVolunteer={deleteVolunteer} editVolunteer={editVolunteer}/>
 
 
         </article>

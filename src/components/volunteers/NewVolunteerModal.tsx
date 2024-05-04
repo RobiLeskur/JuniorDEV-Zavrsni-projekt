@@ -3,13 +3,21 @@ import Form from "react-bootstrap/Form";
 import { ListOfCities } from "../ListOfCities";
 import styles from "./volunteers.module.css";
 import Volunteer from "../../interfaces/VolunteerInterface";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import axios from "axios";
 
+interface NewVolunteerModalProps {
+  show: boolean;
+  onHide: () => void;
+  addNewVolunteer: (newVolunteer: Volunteer) => void;
+}
 
 
-
-function NewVolunteerModal(props: { show: boolean, onHide: () => void; addNewVolunteer : (newVolunteer: Volunteer) => void }) {
+const NewVolunteerModal: React.FC<NewVolunteerModalProps> = ({
+  show,
+  onHide,
+  addNewVolunteer,
+}) => {
   const [newVolunteerData, setNewVolunteerData] = useState({
     first_name: "",
     last_name: "",
@@ -18,8 +26,6 @@ function NewVolunteerModal(props: { show: boolean, onHide: () => void; addNewVol
     preferences: [] as String[],
   })
   const [volunteers, setVolunteers] = useState([] as Volunteer[]);
-
-
 
 
 
@@ -47,18 +53,20 @@ function NewVolunteerModal(props: { show: boolean, onHide: () => void; addNewVol
     console.log(newVolunteerData);
   };
 
-  function addNewVolunteer() {
-     axios
-    .post("http://localhost:3001/volunteers", newVolunteerData)
-    .then(res => {
-      axios.get("http://localhost:3001/volunteers")
-        .then(rez => setVolunteers(rez.data));
-  }); 
-} 
+  function addNewVolunteerFunction(newVolunteer: Volunteer) {
+    axios
+      .post("http://localhost:3001/volunteers", newVolunteer)
+      .then(res => {
+        setVolunteers(prevVolunteers => [...prevVolunteers, res.data]);
+        addNewVolunteer(res.data); 
+      })
+      .catch(err => console.error("Error adding new volunteer:", err));
+}
+
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    addNewVolunteer();
+    addNewVolunteerFunction(newVolunteerData as Volunteer);
     
     
     setNewVolunteerData({
@@ -69,12 +77,13 @@ function NewVolunteerModal(props: { show: boolean, onHide: () => void; addNewVol
       preferences: [] as String[],
     })
     
-    props.onHide();
+    onHide();
   }
 
   return (
     <Modal
-      {...props}
+      show={show}
+      onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
