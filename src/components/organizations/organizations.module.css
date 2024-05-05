@@ -10,6 +10,15 @@
     margin-bottom: 10px;
   }
   
+hr{
+  color: rgb(77, 77, 77);
+  border-width: 3px;
+}
+
+  h1, h2{
+    color: white;
+    text-shadow: 1px 1px rgb(119, 119, 119);
+  }
   .card {
     width: 100%;
     display: flex;

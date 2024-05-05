@@ -5,10 +5,10 @@ import Volunteer from "../../interfaces/VolunteerInterface";
 import { useState, useEffect} from "react";
 import axios from "axios";
 import styles from "./organizations.module.css";
+import Organization from "../../interfaces/OrganizationInterface";
 
 
-
-function NewOrganizationModal({show, onHide} : {show: boolean, onHide: () => void}){
+function NewOrganizationModal({show, onHide, addPendingOrganization} : {show: boolean, onHide: () => void, addPendingOrganization: (organization: Organization) => void}){
     const [newOrganizationData, setNewOrganizationData] = useState({
         name: "",
         city: "",
@@ -36,11 +36,27 @@ function NewOrganizationModal({show, onHide} : {show: boolean, onHide: () => voi
       .catch(err => console.error("Error adding new volunteer:", err));
 } */
 
+function generateRandomId(): string {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let randomString = '';
+  for (let i = 0; i < 4; i++) {
+      randomString += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return randomString;
+}
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
    
+    const newOrganization: Organization = {
+      id: generateRandomId(),
+      name: newOrganizationData.name,
+      city: newOrganizationData.city,
+      address: newOrganizationData.address,
+      activity_ids: [],
+  };
     
+  addPendingOrganization(newOrganization);
     
     setNewOrganizationData({
       name: "",

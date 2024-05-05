@@ -7,9 +7,12 @@ import Activity from '../../interfaces/ActivityInterface';
 interface OrganizationCardProps {
   organization: Organization;
   onShowModal: () => void;
+  isActive: boolean;
+  deleteOrganization: (organization: Organization) => void;
+  uploadOrganization: (organization: Organization) => void;
 }
 
-function OrganizationCard({ organization, onShowModal }: OrganizationCardProps): JSX.Element {
+function OrganizationCard({ organization, onShowModal, isActive, deleteOrganization, uploadOrganization }: OrganizationCardProps): JSX.Element {
   return (
     <div className={styles.row}>
       <Card className={styles.card}>
@@ -17,7 +20,11 @@ function OrganizationCard({ organization, onShowModal }: OrganizationCardProps):
           <Button variant="primary" onClick={onShowModal}>Detalji</Button>
       </Card>
  
-        <Button className={styles.deleteButton} variant="danger">🗑️</Button>
+      {isActive ? (
+        <Button className={styles.deleteButton} onClick={() => deleteOrganization(organization)} variant="danger">🗑️</Button>
+      ) : (
+        <Button className={styles.deleteButton} onClick={() => uploadOrganization(organization)} variant="success">🢁</Button>
+      )}
         
     </div>
   );
