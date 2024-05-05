@@ -136,7 +136,7 @@ function VolunteersPage({activities }: {activities: Activity[]}) {
     <>
       <div className={styles.container}>
         <article className={styles.left}>
-          <h2>Filter:</h2>
+          <h3>Filter:</h3>
           <Form.Group>
             <Form.Label>Grad</Form.Label>
             <Form.Select name='city' onChange={handleFilterChange} value={filters.city}>

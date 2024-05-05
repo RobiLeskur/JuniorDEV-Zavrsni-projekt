@@ -1,76 +1,82 @@
 .container {
-    display: flex;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    height: 80vh; 
-  }
-  
-  .left {
-    flex: 1; 
-    background-color: #f0f0f0; 
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    padding: 1em;
-    position: relative;
-  }
-  
-  .right {
-    flex: 2; 
-    padding: 1em;
-    background-color: #ccc;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    overflow: auto;
-  }
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  height: 80vh;
+  -webkit-box-shadow: 7px 5px 43px -11px rgb(0, 0, 0);
+  -moz-box-shadow: 7px 5px 43px -11px rgb(0, 0, 0);
+  box-shadow: 7px 5px 43px -11px rgb(0, 0, 0);
+}
 
-  .group{
-    margin: 1rem;
+.left {
+  flex: 1;
+  background-color: #e4e4e4e2;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 1em;
+  position: relative;
+}
 
-  }
+.right {
+  flex: 2;
+  padding: 1em;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #ccccccdb;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
 
-  .input{
-    margin-bottom: 1rem;
-  }
+.group {
+  margin: 1rem;
 
-  .addNewVolunteer{
-    position: absolute;
-    padding-left: 1em;
-    padding-right: 1em;
-    left: 1rem;
-    bottom: 1rem;
-    opacity: 80%;
-  }
+}
 
-  .addNewVolunteer:hover{
-    opacity: 1;
-  }
+.input {
+  margin-bottom: 1rem;
+}
 
-  .card {
-    position: relative;
-    margin-bottom: 1rem;
-    height: 100%;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    
-  }
+.addNewVolunteer {
+  position: absolute;
+  padding-left: 1em;
+  padding-right: 1em;
+  left: 1rem;
+  bottom: 1rem;
+  opacity: 80%;
+}
+
+.addNewVolunteer:hover {
+  opacity: 1;
+}
+
+.card {
+  position: relative;
+  margin-bottom: 1rem;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+}
 
 
 
-  .activitiesAndGenderContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    flex-wrap: wrap;
-    overflow: auto;
-    scrollbar-width: thin;
-    height: 70%;
-  }
+.activitiesAndGenderContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  flex-wrap: wrap;
+  overflow: auto;
+  scrollbar-width: thin;
+  height: 70%;
+}
 
-  .displayVolunteersContainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-  }
+.displayVolunteersContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

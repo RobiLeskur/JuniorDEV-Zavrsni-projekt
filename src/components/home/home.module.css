@@ -1,0 +1,40 @@
+
+.homeContainer {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 2rem;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .homeContainer h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: black;
+  }
+  
+  .homeContainer p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .homeContainer ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  .homeContainer ul li {
+    margin-bottom: 10px;
+  }
+  
+  .linkIcons {
+    margin-top: 20px;
+  }
+  
+  .linkIcons a {
+    margin-right: 10px;
+  }

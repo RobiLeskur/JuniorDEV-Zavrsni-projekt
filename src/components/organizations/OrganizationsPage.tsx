@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 import Activity from '../../interfaces/ActivityInterface';
 import Organization from '../../interfaces/OrganizationInterface';
-import { Button } from 'react-bootstrap';
 import NewOrganizationModal from './NewOrganizationModal';
 import styles from './organizations.module.css';
 import OrganizationCard from './OrganizationCard';
@@ -18,10 +18,10 @@ function OrganizationsPage({ activities }: { activities: Activity[] }) {
     const [newOrganizationModalShow, setNewOrganizationModalShow] = useState<boolean>(false);
     const [pendingOrganizations, setPendingOrganizations] = useState<Organization[]>([]);
     const [confirmationModalShow, setConfirmationModalShow] = useState<boolean>(false);
-
+    const [sortBy, setSortBy] = useState<string>('name');
+    const [sortOrder, setSortOrder] = useState<string>('asc'); 
 
     const { isAdmin, toggleAdmin } = useAdmin();
-
 
     useEffect(() => {
         axios
@@ -35,6 +35,31 @@ function OrganizationsPage({ activities }: { activities: Activity[] }) {
                 setIsLoading(false);
             });
     }, []);
+
+   
+
+
+    const handleSortChange = (criteria: keyof Organization) => {
+        if (sortBy === criteria) {
+ 
+            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+        } else {
+            setSortBy(criteria);
+            setSortOrder('asc');
+        }
+
+        let sortedOrganizations = [...organizations];
+        sortedOrganizations.sort((a, b) => {
+            if (a[criteria] < b[criteria]) {
+                return sortOrder === 'asc' ? -1 : 1;
+            }
+            if (a[criteria] > b[criteria]) {
+                return sortOrder === 'asc' ? 1 : -1;
+            }
+            return 0;
+        });
+        setOrganizations(sortedOrganizations);
+    };
 
     function deleteOrganization() {
         if (!selectedOrganization) return;
@@ -80,6 +105,11 @@ function OrganizationsPage({ activities }: { activities: Activity[] }) {
         <div className={styles.organizationsContainer}>
             <h1>Organizacije</h1>
             <hr />
+            <div style={{marginBottom: '20px', display: 'flex'}}>
+                <Button style={{marginRight: '10px'}} variant="primary" onClick={() => handleSortChange('name')}>Sortiraj po imenu</Button>
+                <Button style={{marginRight: '10px'}} variant="primary" onClick={() => handleSortChange('address')}>Sortiraj po adresi</Button>
+                <Button variant="primary" onClick={() => handleSortChange('city')}>Sortiraj po gradu</Button>
+            </div>
             {organizations.map(organization =>
                 <OrganizationCard
                     key={organization.id}
@@ -94,10 +124,7 @@ function OrganizationsPage({ activities }: { activities: Activity[] }) {
                 />
             )}
 
-
-
-
-            {(pendingOrganizations.length>0 && isAdmin) && (
+            {(pendingOrganizations.length > 0 && isAdmin) && (
                 <>
                     <h1 style={{ marginTop: '20px' }}>Pending Organizations</h1>
                     <hr />
@@ -107,7 +134,7 @@ function OrganizationsPage({ activities }: { activities: Activity[] }) {
                             organization={organization}
                             onShowModal={() => handleShowModal(organization.id)}
                             deleteOrganization={() => {
-                                setSelectedOrganization(organization); 
+                                setSelectedOrganization(organization);
                                 setConfirmationModalShow(true);
                             }}
                             uploadOrganization={() => uploadOrganization(organization)}
@@ -118,13 +145,13 @@ function OrganizationsPage({ activities }: { activities: Activity[] }) {
             )
             }
 
-        {(pendingOrganizations.length===0 && isAdmin) &&
-        <>
-        <h1 style={{ marginTop: '20px'}}>Pending Organizations</h1>
-        <hr />
-            <h2>Trenutno nema organizacija za obradu</h2>
-        </>
-        }
+            {(pendingOrganizations.length === 0 && isAdmin) &&
+                <>
+                    <h1 style={{ marginTop: '20px' }}>Zahtjevi za odobrenje</h1>
+                    <hr />
+                    <h2>Trenutno nema organizacija za obradu</h2>
+                </>
+            }
 
             <NewOrganizationModal
                 show={newOrganizationModalShow}

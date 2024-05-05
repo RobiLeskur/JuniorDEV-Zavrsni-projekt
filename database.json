@@ -12,7 +12,7 @@
       "gender": "female"
     },
     {
-      "id": "3",
+      "id": "2",
       "first_name": "Ivana",
       "last_name": "Novak",
       "city": "Osijek",
@@ -22,7 +22,7 @@
       "gender": "female"
     },
     {
-      "id": "5",
+      "id": "3",
       "first_name": "Maja",
       "last_name": "Pavić",
       "city": "Zadar",
@@ -32,7 +32,7 @@
       "gender": "female"
     },
     {
-      "id": "6",
+      "id": "4",
       "first_name": "Ivan",
       "last_name": "Babić",
       "city": "Pula",
@@ -45,7 +45,7 @@
       "gender": "male"
     },
     {
-      "id": "7",
+      "id": "5",
       "first_name": "Marina",
       "last_name": "Knežević",
       "city": "Dubrovnik",
@@ -56,7 +56,7 @@
       "gender": "female"
     },
     {
-      "id": "8",
+      "id": "6",
       "first_name": "Filip",
       "last_name": "Tomić",
       "city": "Varaždin",
@@ -68,7 +68,7 @@
       "gender": "male"
     },
     {
-      "id": "9",
+      "id": "7",
       "first_name": "Kristina",
       "last_name": "Horvat",
       "city": "Zagreb",
@@ -79,7 +79,7 @@
       "gender": "female"
     },
     {
-      "id": "10",
+      "id": "8",
       "first_name": "Igor",
       "last_name": "Vuković",
       "city": "Split",
@@ -91,15 +91,26 @@
       "gender": "male"
     },
     {
-      "id": "2",
+      "id": "9",
       "first_name": "Marko",
       "last_name": "Kovač",
-      "city": "Split",
+      "city": "Rijeka",
       "preferences": [
         "Kultura",
         "Prijevoz"
       ],
       "gender": "male"
+    },
+    {
+      "id": "10",
+      "first_name": "Lana",
+      "last_name": "Marković",
+      "city": "Split",
+      "preferences": [
+        "Kultura",
+        "Zdravstvo"
+      ],
+      "gender": "female"
     }
   ],
   "activities": [
@@ -198,6 +209,26 @@
       "city": "Zadar",
       "activity_ids": [
         "5"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Red Cross",
+      "address": "Main Street",
+      "city": "Osijek",
+      "activity_ids": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Eco Volunteers",
+      "address": "Green Avenue",
+      "city": "Rijeka",
+      "activity_ids": [
+        "3",
+        "4"
       ]
     }
   ]
