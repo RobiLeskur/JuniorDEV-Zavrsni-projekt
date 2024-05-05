@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Activity from '../../interfaces/ActivityInterface';
 import Volunteer from '../../interfaces/VolunteerInterface';
 import Organization from '../../interfaces/OrganizationInterface';
 import styles from './activities.module.css';
 import AddVolunteerToActivityForm from './AddVolunteerToActivityForm';
-
-import { Button, ButtonGroup, CloseButton } from 'react-bootstrap';
+import ConfirmationModal from '../ConfirmationModal';
+import { Button, CloseButton } from 'react-bootstrap';
 
 function ActivitiesCardPopup({ togglePopup, activity, fetchData }: { togglePopup: any, activity: Activity, fetchData: Function }) {
     const [volunteers, setVolunteers] = useState([] as Volunteer[]);
     const [organizations, setOrganizations] = useState([] as Organization[]);
-    const [selectedVolunteerId, setSelectedVolunteerId] = useState<string | null>(null);
+    const [selectedVolunteerId, setSelectedVolunteerId] = useState<string | undefined>();
+    const [confirmDeleteShow, setConfirmDeleteShow] = useState(false);
+
+    const handleDeleteConfirm = () => {
+        if (selectedVolunteerId) {
+          removeVolunteerFromActivity(selectedVolunteerId);
+        }
+      };
+
 
     useEffect(() => {
         axios
@@ -47,13 +55,24 @@ function ActivitiesCardPopup({ togglePopup, activity, fetchData }: { togglePopup
             });
     };
 
-    const confirmDeleteVolunteer = (volunteerId: string) => {
-        setSelectedVolunteerId(volunteerId);
+    const handleAddVolunteerToActivity = (selectedVolunteer: Volunteer) => {
+
+        if(selectedVolunteer.id && activity.volunteers.includes(selectedVolunteer.id)){
+            alert("Volonter je već na aktivnost");
+            return;
+        }
+
+        const updatedActivity = { ...activity, volunteers: [...activity.volunteers, selectedVolunteer.id] };
+        axios.put(`http://localhost:3001/activities/${activity.id}`, updatedActivity)
+            .then(() => {
+                fetchData();
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
-    const cancelDeleteVolunteer = () => {
-        setSelectedVolunteerId(null);
-    };
+    
 
     return (
         <div className={styles.popup}>
@@ -63,7 +82,7 @@ function ActivitiesCardPopup({ togglePopup, activity, fetchData }: { togglePopup
                 <p><b>Opis:</b> {activity.description}</p>
                 <p><b>Lokacija:</b> {activity.location}</p>
                 <p><b>Organizacija: </b>{organizations && getOrganizationById(activity.organization)?.name}</p>
-                <AddVolunteerToActivityForm />
+                <AddVolunteerToActivityForm volunteers={volunteers} onAddVolunteer={handleAddVolunteerToActivity} />
                 <hr />
                 <p style={{ marginBottom: "0" }}><b>Volonteri:</b></p>
                 <div className={`${styles.lg} ${styles.scrollableDiv}`}>
@@ -73,21 +92,21 @@ function ActivitiesCardPopup({ togglePopup, activity, fetchData }: { togglePopup
                             volunteer &&
                             <div key={volunteer.id} className={styles.volunteerItem}>
                                 <p style={{ marginBottom: "0" }}>ID: {volunteer.id} - {volunteer.first_name} {volunteer.last_name}</p>
-                                <Button onClick={() => confirmDeleteVolunteer(volunteer.id)} variant="outline-danger">Delete</Button>{' '}
+                                <Button onClick={() => {setConfirmDeleteShow(true); setSelectedVolunteerId(volunteerId)}} variant="outline-danger">Ukloni</Button>{' '}
                             </div>
                         );
                     })}
                 </div>
-                {selectedVolunteerId && (
-                    <div className={styles.confirmationPopup}>
-                        <hr />
-                        <p>Jeste li sigurni da želite maknuti volontera pod imenom {getVolunteerById(selectedVolunteerId)?.first_name} {getVolunteerById(selectedVolunteerId)?.last_name} s popisa?</p>
-                        <ButtonGroup aria-label="Basic example">
-                            <Button onClick={() => removeVolunteerFromActivity(selectedVolunteerId)} variant="danger">Yes</Button>
-                            <Button onClick={cancelDeleteVolunteer} variant="outline-success">No</Button>
-                        </ButtonGroup>
-                    </div>
-                )}
+              
+
+<ConfirmationModal
+        show={confirmDeleteShow}
+        onHide={() => setConfirmDeleteShow(false)}
+        onConfirm={handleDeleteConfirm}
+        message="Jeste li sigurni da želite ukloniti ovog volontera iz aktivnosti?"
+      />
+
+
             </div>
         </div>
     );

@@ -7,7 +7,7 @@ export default interface Activity {
     date: string;
     location: string;
     organization: string;
-    volunteers: [];
+    volunteers: string[];
   }
 
   

@@ -4,7 +4,7 @@
       "id": "1",
       "first_name": "Ana",
       "last_name": "Horvat",
-      "city": "Zagreb",
+      "city": "Koprivnica",
       "preferences": [
         "Edukacija",
         "Zdravstvo"
@@ -20,18 +20,6 @@
         "Zdravstvo"
       ],
       "gender": "female"
-    },
-    {
-      "id": "4",
-      "first_name": "Petar",
-      "last_name": "Klarić",
-      "city": "Rijeka",
-      "preferences": [
-        "Ekologija",
-        "Kultura",
-        "Razno"
-      ],
-      "gender": "male"
     },
     {
       "id": "5",
@@ -103,16 +91,6 @@
       "gender": "male"
     },
     {
-      "id": "9941",
-      "first_name": "asd",
-      "last_name": "d",
-      "city": "Koprivnica",
-      "gender": "female",
-      "preferences": [
-        "Edukacija"
-      ]
-    },
-    {
       "id": "2",
       "first_name": "Marko",
       "last_name": "Kovač",
@@ -133,9 +111,9 @@
       "date": "2024-04-25",
       "organization": "1",
       "volunteers": [
-        "2",
         "3",
-        "4"
+        "4",
+        "5"
       ]
     },
     {
@@ -163,8 +141,7 @@
         "3",
         "4",
         "5",
-        "9",
-        "10"
+        "9"
       ]
     },
     {

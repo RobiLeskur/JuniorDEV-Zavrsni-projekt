@@ -8,16 +8,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Volunteer from '../../interfaces/VolunteerInterface';
 import DisplayVolunteers from './DisplayVolunteers';
+import Activity from '../../interfaces/ActivityInterface';
+import ConfirmationModal from '../ConfirmationModal';
 
-function VolunteersPage({ }: {}) {
+function VolunteersPage({activities }: {activities: Activity[]}) {
   const [modalShow, setModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false); 
   const [volunteers, setVolunteers] = useState([] as Volunteer[]);
-  const [editingVolunteer, setEditingVolunteer] = useState<Volunteer | undefined>(); 
+  const [volunteerToEdit, setVolunteerToEdit] = useState<Volunteer | undefined>(); 
+  const [confirmDeleteShow, setConfirmDeleteShow] = useState(false);
+  const [volunteerToDelete, setVolunteerToDelete] = useState<Volunteer | undefined>();
+
 
   const [filters, setFilters] = useState({
     city: '',
-    category: '',
+    preferences: '',
     gender: ''
   });
 
@@ -34,24 +39,65 @@ function VolunteersPage({ }: {}) {
   }
 
   function updateVolunteer(updatedVolunteer: Volunteer) {
-  
-  
+      axios
+        .put(`http://localhost:3001/volunteers/${updatedVolunteer.id}`, updatedVolunteer)
+        .then(() => {
+          setVolunteers(prevVolunteers => {
+            return prevVolunteers.map(volunteer => {
+              if (volunteer.id === updatedVolunteer.id) {
+                return updatedVolunteer;
+              }
+              return volunteer;
+            });
+          });
+          setEditModalShow(false);
+        })
+        .catch(err => {
+          console.log(err);
+        });
   }
+  
+  const handleDeleteConfirm = () => {
+    if (volunteerToDelete) {
+      deleteVolunteer(volunteerToDelete.id);
+      setVolunteerToDelete(undefined);
+      setConfirmDeleteShow(false);
+    }
+  };
 
-  function deleteVolunteer(volunteerId: string) {
+  const handleDeleteClick = (volunteer: Volunteer) => {
+    setVolunteerToDelete(volunteer);
+    setConfirmDeleteShow(true);
+  };
+  
+
+  function deleteVolunteer(volunteerId: string | undefined) {
+    if (!volunteerId) {
+      console.error('Volunteer ID is not defined.');
+      return;
+    }
+  
     axios
-      .delete('http://localhost:3001/volunteers/' + volunteerId)
+      .delete(`http://localhost:3001/volunteers/${volunteerId}`)
       .then(() => {
         setVolunteers(prevVolunteers => prevVolunteers.filter(volunteer => volunteer.id !== volunteerId));
+
+        activities.forEach(activity => {
+          if (activity.volunteers.includes(volunteerId)) {
+            activity.volunteers = activity.volunteers.filter(id => id !== volunteerId);
+          }
+        });
       })
       .catch(err => {
         console.log(err);
       });
   }
+
+
   function editVolunteer(volunteer: Volunteer) {
   
-    setEditingVolunteer(volunteer); 
-    setModalShow(true); 
+    setVolunteerToEdit(volunteer); 
+    setEditModalShow(true); 
   
   }
 
@@ -77,7 +123,7 @@ function VolunteersPage({ }: {}) {
     return (
       (filters.city === '' || volunteer.city === filters.city) &&
       (filters.gender === '' || volunteer.gender === filters.gender) &&
-      (filters.category === '' || volunteer.preferences.includes(filters.category))
+      (filters.preferences === '' || volunteer.preferences.includes(filters.preferences))
     );
   });
 
@@ -94,7 +140,7 @@ function VolunteersPage({ }: {}) {
           <Form.Group>
             <Form.Label>Grad</Form.Label>
             <Form.Select name='city' onChange={handleFilterChange} value={filters.city}>
-              <option>Odaberi...</option>
+              <option value={""}>Sve</option>
               {ListOfCities.map((city) => (
                 <option key={city}>{city}</option>
               ))}
@@ -133,21 +179,28 @@ function VolunteersPage({ }: {}) {
           />
 
 
-{editingVolunteer && (
+{volunteerToEdit && (
           <EditVolunteerModal
             show={editModalShow}
             onHide={() => setEditModalShow(false)}
-            editingVolunteer={editingVolunteer}
+            editingVolunteer={volunteerToEdit}
             updateVolunteer={updateVolunteer} 
           />
         )}
+
+<ConfirmationModal
+        show={confirmDeleteShow}
+        onHide={() => setConfirmDeleteShow(false)}
+        onConfirm={handleDeleteConfirm}
+        message="Jeste li sigurni da želite ukloniti ovog volontera?"
+      />
 
         </article>
 
 
         <article className={styles.right}>
 
-          <DisplayVolunteers volunteers={filteredVolunteers as Volunteer[]} deleteVolunteer={deleteVolunteer} editVolunteer={editVolunteer}/>
+          <DisplayVolunteers volunteers={filteredVolunteers as Volunteer[]} deleteVolunteer={handleDeleteClick} editVolunteer={editVolunteer}/>
 
 
         </article>

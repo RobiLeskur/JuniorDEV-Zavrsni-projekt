@@ -5,7 +5,7 @@ export default interface Organization {
     name: string;
     address: string;
     city: string;
-    activity_ids: [];
+    activity_ids: string[];
   }
 
   

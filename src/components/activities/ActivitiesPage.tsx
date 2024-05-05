@@ -1,6 +1,5 @@
 import ActivitiesCard from './ActivitiesCard';
 import Activity from '../../interfaces/ActivityInterface';
-import Volunteer from '../../interfaces/VolunteerInterface';
 import styles from './activities.module.css';
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';

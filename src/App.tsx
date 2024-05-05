@@ -1,14 +1,18 @@
 import './App.css';
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import {useState, useEffect } from 'react';
 import NavBar from './components/NavBarAndAdminComands/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/home/Home';
 import ActivitiesPage from './components/activities/ActivitiesPage';
 import VolunteersPage from './components/volunteers/VolunteersPage';
-import { AdminContextProvider } from './components/NavBarAndAdminComands/AdminContext';
+import {  } from './components/NavBarAndAdminComands/AdminContext';
 import axios from 'axios';
 import Activity from './interfaces/ActivityInterface';
 import Volunteer from './interfaces/VolunteerInterface';
+import {AdminContextProvider} from './components/NavBarAndAdminComands/AdminContext';
+import OrganizationsPage from './components/organizations/OrganizationsPage';
+
+
 
 function App() {
   const [activities, setActivities] = useState([] as Activity[]);
@@ -73,8 +77,13 @@ function App() {
                 />
                 <Route
                   path="/volunteers"
-                  element={<VolunteersPage  />}
+                  element={<VolunteersPage activities={activities} />}
                 />
+                <Route
+                path="/organizations"
+                element={<OrganizationsPage activities={activities} />}
+              />
+                
               </Routes>
             )}
           </div>

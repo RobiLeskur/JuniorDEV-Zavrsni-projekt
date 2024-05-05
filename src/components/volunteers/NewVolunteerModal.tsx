@@ -50,8 +50,9 @@ const NewVolunteerModal: React.FC<NewVolunteerModalProps> = ({
       ...prevData,
       [name]: value,
     }));
-    console.log(newVolunteerData);
   };
+
+  
 
   function addNewVolunteerFunction(newVolunteer: Volunteer) {
     axios
@@ -119,7 +120,7 @@ const NewVolunteerModal: React.FC<NewVolunteerModalProps> = ({
               <Form.Check required label="Žensko" name="gender" value={"female"} onChange={handleInput} type={"radio"} />
             </div>
           </article>
-          <Modal.Footer>
+          <Modal.Footer style={{paddingBottom: '0'}}>
             <Button variant="success" type="submit">Prijavi</Button>
           </Modal.Footer>
         </Form>

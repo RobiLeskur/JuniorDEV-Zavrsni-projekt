@@ -1,27 +1,45 @@
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import { Button } from 'react-bootstrap';
+import Volunteer from '../../interfaces/VolunteerInterface';
+import { Form, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import ConfirmationModal from '../ConfirmationModal';
 
-function AddVolunteerToActivityForm(){
+function AddVolunteerToActivityForm({ volunteers, onAddVolunteer }: {volunteers: Volunteer[]; onAddVolunteer: (selectedVolunteer: Volunteer) => void}) {
+  const [selectedVolunteer, setSelectedVolunteer] = useState<Volunteer | null>(null);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
+  const handleAddVolunteer = () => {
+    if (selectedVolunteer) {
+        onAddVolunteer(selectedVolunteer);
+        setShowConfirmationModal(false);
+    }
+};
 
-    return (
-        <Form>
-          <Row>
-            <Col>
-              <Form.Control style={{marginBottom: '5px'}} placeholder="First name" />
-            
-              <Form.Control placeholder="Last name" />
-            </Col>
-            <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Button variant="success" type="submit">Prijavi</Button>
-            </Col>
-          </Row>
-        </Form>
-      );
-    
-
+  return (
+    <>
+      <Form.Group className="mb-3">
+        <Form.Label>Dodaj Volontera</Form.Label>
+        <Form.Select
+          onChange={(e) => setSelectedVolunteer(volunteers.find(volunteer => volunteer.id === e.target.value) || null)}
+        >
+          <option>...</option>
+          {volunteers.map((volunteer) => (
+            <option key={volunteer.id} value={volunteer.id}>{volunteer.first_name} {volunteer.last_name}</option>
+          ))}
+        </Form.Select>
+      </Form.Group>
+      {
+        selectedVolunteer &&
+      <Button onClick={() => setShowConfirmationModal(true)}>Dodaj volontera</Button>
+    }
+      <ConfirmationModal
+        show={showConfirmationModal}
+        onHide={() => setShowConfirmationModal(false)}
+        onConfirm={handleAddVolunteer}
+        message={"Dodaj volontera " + selectedVolunteer?.first_name + " " + selectedVolunteer?.last_name + " na aktivnost" }
+      />
+      
+    </>
+  );
 }
 
-export default AddVolunteerToActivityForm
+export default AddVolunteerToActivityForm;

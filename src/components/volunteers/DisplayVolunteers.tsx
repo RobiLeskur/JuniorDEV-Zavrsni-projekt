@@ -28,10 +28,10 @@ function DisplayVolunteers({ volunteers, deleteVolunteer, editVolunteer }: { vol
                                 </Card.Text>
                                 {
                                     isAdmin &&
-                                    <div style={{float: 'right'}}>
+                                    <div style={{position: "absolute", bottom: "0.5em", right: "0.5em"}}>
                                     
-                                        <Button style={{ opacity: '0.7' }} onClick={() => editVolunteer(volunteer)} variant="warning">Edit</Button>
-                                        <Button style={{ opacity: '0.8' }} onClick={() => deleteVolunteer(volunteer.id)} variant="danger">🗑</Button>
+                                        <Button style={{ opacity: '0.7', marginRight: '0.5em' }} onClick={() => editVolunteer(volunteer)} variant="warning">Edit</Button>
+                                        <Button style={{ opacity: '0.8' }} onClick={() => deleteVolunteer(volunteer)} variant="danger">🗑</Button>
                                     </div>}
                             </Card.Body>
                         </Card>

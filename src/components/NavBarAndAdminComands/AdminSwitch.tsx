@@ -1,6 +1,7 @@
 import Form from 'react-bootstrap/Form';
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAdmin } from './AdminContext';
+
 
 function AdminSwitch() {
   const { isAdmin , toggleAdmin } = useAdmin();
